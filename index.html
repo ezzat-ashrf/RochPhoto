@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#08255e">
+  <title>Roche Photo Wall</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main class="page-shell">
+    <section class="registration-card">
+      <header>
+        <span class="eyebrow">LIVE PHOTO WALL</span>
+        <h1>Share your moment</h1>
+        <p>Take a photo, add your name and a short message, then watch it appear on the big screen.</p>
+      </header>
+
+      <form id="registrationForm" novalidate>
+        <label class="photo-picker" for="photoInput">
+          <img id="photoPreview" alt="Your selected photo preview">
+          <span id="photoPrompt">
+            <strong>Take or choose a photo</strong>
+            <small>Tap here to open your camera</small>
+          </span>
+        </label>
+        <input id="photoInput" type="file" accept="image/*" capture="user" required>
+
+        <label class="field">
+          <span>Your name</span>
+          <input id="nameInput" type="text" maxlength="30" autocomplete="name" placeholder="Enter your name" required>
+        </label>
+
+        <label class="field">
+          <span>Your message</span>
+          <textarea id="messageInput" maxlength="100" rows="3" placeholder="Write a short message" required></textarea>
+          <small><span id="messageCount">0</span>/100</small>
+        </label>
+
+        <button id="submitButton" type="submit">
+          <span>Send to the big screen</span>
+        </button>
+        <p id="status" class="status" role="status" aria-live="polite"></p>
+      </form>
+    </section>
+  </main>
+  <script src="app.js"></script>
+</body>
+</html>
