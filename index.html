@@ -8,7 +8,14 @@
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <main class="page-shell">
+  <section id="welcomeScreen" class="welcome-screen" aria-label="Welcome screen">
+    <div class="welcome-art">
+      <img src="welcome-screen.jpg" alt="Vabysmo event welcome screen">
+      <button id="startButton" class="welcome-start" type="button" aria-label="Tap the hand to start"></button>
+    </div>
+  </section>
+
+  <main id="registrationPage" class="page-shell" aria-hidden="true">
     <header class="brand-header" aria-label="Vabysmo and Roche">
       <img src="brand-header.png" alt="Vabysmo and Roche">
     </header>

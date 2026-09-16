@@ -1,4 +1,7 @@
 const FIREBASE_ROOT = "https://photo-game-2f638-default-rtdb.firebaseio.com";
+const welcomeScreen = document.querySelector("#welcomeScreen");
+const startButton = document.querySelector("#startButton");
+const registrationPage = document.querySelector("#registrationPage");
 const form = document.querySelector("#registrationForm");
 const photoInput = document.querySelector("#photoInput");
 const photoPreview = document.querySelector("#photoPreview");
@@ -11,6 +14,15 @@ const status = document.querySelector("#status");
 
 let selectedFile = null;
 let previewUrl = null;
+
+startButton.addEventListener("click", () => {
+  registrationPage.setAttribute("aria-hidden", "false");
+  welcomeScreen.classList.add("is-leaving");
+  window.setTimeout(() => {
+    welcomeScreen.hidden = true;
+    document.querySelector(".photo-picker")?.focus();
+  }, 550);
+});
 
 photoInput.addEventListener("change", () => {
   selectedFile = photoInput.files?.[0] ?? null;
