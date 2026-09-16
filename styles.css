@@ -16,7 +16,7 @@ body { margin: 0; min-height: 100vh; background: #eef1f5; }
   display: grid;
   place-items: center;
   overflow: hidden;
-  background: #02020b;
+  background: #0c102c;
   opacity: 1;
   transition: opacity .55s ease, visibility .55s ease;
 }
@@ -29,8 +29,9 @@ body { margin: 0; min-height: 100vh; background: #eef1f5; }
 
 .welcome-art {
   position: relative;
-  width: min(100vw, 65svh);
-  height: min(100svh, 153.85vw);
+  width: min(100vw, 56.26svh);
+  height: min(100svh, 177.74vw);
+  background: #0c102c;
 }
 
 .welcome-art > img {
@@ -43,10 +44,10 @@ body { margin: 0; min-height: 100vh; background: #eef1f5; }
 .welcome-start {
   position: absolute;
   z-index: 2;
-  left: 39%;
-  bottom: 3%;
-  width: 25%;
-  height: 24%;
+  left: 37%;
+  bottom: 2%;
+  width: 28%;
+  height: 23%;
   min-height: 0;
   margin: 0;
   padding: 0;

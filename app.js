@@ -24,6 +24,16 @@ startButton.addEventListener("click", () => {
   }, 550);
 });
 
+function showWelcomeScreen() {
+  window.scrollTo({ top: 0, behavior: "auto" });
+  registrationPage.setAttribute("aria-hidden", "true");
+  welcomeScreen.hidden = false;
+  requestAnimationFrame(() => {
+    welcomeScreen.classList.remove("is-leaving");
+    startButton.focus({ preventScroll: true });
+  });
+}
+
 photoInput.addEventListener("change", () => {
   selectedFile = photoInput.files?.[0] ?? null;
   if (!selectedFile) return;
@@ -77,6 +87,7 @@ form.addEventListener("submit", async (event) => {
     photoPreview.removeAttribute("src");
     photoPreview.style.display = "none";
     photoPrompt.style.display = "block";
+    window.setTimeout(showWelcomeScreen, 1200);
   } catch (error) {
     console.error(error);
     setStatus(error.message || "Could not send your photo. Please try again.", "error");
