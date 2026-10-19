@@ -6,9 +6,6 @@ const form = document.querySelector("#registrationForm");
 const photoInput = document.querySelector("#photoInput");
 const photoPreview = document.querySelector("#photoPreview");
 const photoPrompt = document.querySelector("#photoPrompt");
-const nameInput = document.querySelector("#nameInput");
-const messageInput = document.querySelector("#messageInput");
-const messageCount = document.querySelector("#messageCount");
 const submitButton = document.querySelector("#submitButton");
 const status = document.querySelector("#status");
 
@@ -45,16 +42,10 @@ photoInput.addEventListener("change", () => {
   setStatus("");
 });
 
-messageInput.addEventListener("input", () => {
-  messageCount.textContent = messageInput.value.length;
-});
-
 form.addEventListener("submit", async (event) => {
   event.preventDefault();
-  const personName = nameInput.value.trim();
-  const message = messageInput.value.trim();
-  if (!selectedFile || !personName || !message) {
-    setStatus("Please add a photo, your name, and a message.", "error");
+  if (!selectedFile) {
+    setStatus("Please add a photo.", "error");
     return;
   }
 
@@ -63,7 +54,7 @@ form.addEventListener("submit", async (event) => {
   try {
     const imageBase64 = await resizeImage(selectedFile, 900, 0.78);
     const id = `${Date.now()}-${crypto.randomUUID()}`;
-    const submission = { id, name: personName, message, imageBase64, createdAt: Date.now() };
+    const submission = { id, imageBase64, createdAt: Date.now() };
 
     setStatus("Sending to the big screen…");
     const historyResponse = await fetch(`${FIREBASE_ROOT}/submissions/${id}.json`, {
@@ -83,7 +74,6 @@ form.addEventListener("submit", async (event) => {
     setStatus("Sent! Look at the big screen ✨", "success");
     form.reset();
     selectedFile = null;
-    messageCount.textContent = "0";
     photoPreview.removeAttribute("src");
     photoPreview.style.display = "none";
     photoPrompt.style.display = "block";
