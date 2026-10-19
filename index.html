@@ -3,15 +3,15 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <meta name="theme-color" content="#ffffff">
-  <title>Vabysmo Photo Wall</title>
+  <meta name="theme-color" content="#08001f">
+  <title>Vabysmo Commitment Wall</title>
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
   <section id="welcomeScreen" class="welcome-screen" aria-label="Welcome screen">
     <div class="welcome-art">
-      <img src="welcome-screen.png" alt="Vabysmo event welcome screen">
-      <button id="startButton" class="welcome-start" type="button" aria-label="Tap the hand to start"></button>
+      <img src="commitment-welcome.png" alt="Vabysmo commitment wall welcome screen">
+      <button id="startButton" class="welcome-start" type="button" aria-label="Start"></button>
     </div>
   </section>
 
@@ -26,15 +26,19 @@
           <img id="photoPreview" alt="Your selected photo preview">
           <span id="photoPrompt">
             <b aria-hidden="true">+</b>
-            <strong>ADD YOUR PHOTO</strong>
-            <small>Tap to open camera</small>
+            <strong>TAP TO ADD PHOTO</strong>
           </span>
         </label>
         <input id="photoInput" type="file" accept="image/*" capture="user" required>
       </div>
 
-      <button id="submitButton" type="submit">SEND PHOTO</button>
+      <div class="photo-copy">
+        <h1>ADD YOUR PHOTO</h1>
+        <p>Your photo will join the commitment wall</p>
+      </div>
+
       <p id="status" class="status" role="status" aria-live="polite"></p>
+      <button id="submitButton" type="submit">SEND PHOTO</button>
     </form>
   </main>
   <script src="app.js"></script>
