@@ -37,6 +37,12 @@
         <p>Your photo will join the commitment wall</p>
       </div>
 
+      <label class="message-field" for="messageInput">
+        <span>YOUR MESSAGE</span>
+        <textarea id="messageInput" maxlength="80" rows="2" placeholder="Write your commitment…" required></textarea>
+        <small><b id="messageCount">0</b>/80</small>
+      </label>
+
       <p id="status" class="status" role="status" aria-live="polite"></p>
       <button id="submitButton" type="submit">SEND PHOTO</button>
     </form>

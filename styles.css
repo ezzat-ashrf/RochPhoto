@@ -164,6 +164,53 @@ form {
   line-height: 1.35;
 }
 
+.message-field {
+  position: relative;
+  display: block;
+  margin: 0 0 14px;
+}
+
+.message-field > span {
+  display: block;
+  margin-bottom: 7px;
+  color: #171143;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: .08em;
+}
+
+.message-field textarea {
+  display: block;
+  width: 100%;
+  min-height: 82px;
+  padding: 14px 48px 14px 14px;
+  resize: none;
+  border: 1px solid rgba(75, 69, 131, .25);
+  border-radius: 0;
+  outline: 0;
+  background: #f6f5f9;
+  color: #171143;
+  font: inherit;
+  font-size: 15px;
+  line-height: 1.4;
+  transition: border-color .18s ease, box-shadow .18s ease;
+}
+
+.message-field textarea:focus {
+  border-color: #338fc9;
+  box-shadow: 0 0 0 3px rgba(51, 143, 201, .14);
+}
+
+.message-field textarea::placeholder { color: #9691aa; }
+
+.message-field small {
+  position: absolute;
+  right: 12px;
+  bottom: 10px;
+  color: #8a6dbd;
+  font-size: 11px;
+}
+
 .status {
   min-height: 20px;
   margin: auto 0 8px;
@@ -202,6 +249,7 @@ button:disabled { opacity: .55; cursor: wait; transform: none; }
   .photo-picker { aspect-ratio: 1.15 / 1; }
   .photo-copy { padding-block: 15px 10px; }
   .photo-copy p { font-size: 12px; }
+  .message-field textarea { min-height: 64px; }
   button { min-height: 52px; }
 }
 
