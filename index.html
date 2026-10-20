@@ -47,6 +47,22 @@
       <button id="submitButton" type="submit">SEND PHOTO</button>
     </form>
   </main>
+
+  <main id="resultPage" class="result-page" aria-hidden="true" hidden>
+    <section class="result-shell">
+      <h1>YOUR PHOTO IS READY</h1>
+      <p>Scan the QR code to download your branded photo card.</p>
+      <div class="result-content">
+        <img id="resultCard" class="result-card" alt="Your completed Vabysmo photo card">
+        <div class="qr-panel">
+          <img id="resultQr" class="result-qr" alt="QR code for downloading your photo card">
+          <strong>SCAN TO DOWNLOAD</strong>
+        </div>
+      </div>
+      <button id="finishButton" type="button">FINISH</button>
+    </section>
+  </main>
+  <script src="brand-header-data.js"></script>
   <script src="app.js"></script>
 </body>
 </html>

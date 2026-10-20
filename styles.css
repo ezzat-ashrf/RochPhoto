@@ -8,6 +8,7 @@
 * { box-sizing: border-box; }
 html, body { margin: 0; min-height: 100%; }
 body { min-height: 100svh; background: #ececf1; }
+[hidden] { display: none !important; }
 
 .welcome-screen {
   position: fixed;
@@ -243,6 +244,86 @@ button {
 button:hover { filter: brightness(1.06); }
 button:active { transform: translateY(1px); }
 button:disabled { opacity: .55; cursor: wait; transform: none; }
+
+.result-page {
+  position: fixed;
+  inset: 0;
+  z-index: 120;
+  height: 100svh;
+  padding: clamp(10px, 2.5vw, 24px);
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  background: #08001f;
+}
+
+.result-shell {
+  width: min(100%, 920px);
+  max-height: 100%;
+  padding: clamp(16px, 3vw, 36px);
+  display: flex;
+  flex-direction: column;
+  background: #fff;
+  text-align: center;
+}
+
+.result-shell h1 {
+  margin: 0;
+  color: #171143;
+  font-size: clamp(24px, 5vw, 40px);
+}
+
+.result-shell > p { margin: 8px 0 24px; color: #8a6dbd; }
+
+.result-content {
+  flex: 1;
+  min-height: 0;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(220px, .72fr);
+  gap: clamp(20px, 4vw, 44px);
+  align-items: center;
+}
+
+.result-card {
+  display: block;
+  width: 100%;
+  max-height: 60svh;
+  object-fit: contain;
+  border: 1px solid #e4e2ea;
+  box-shadow: 0 16px 40px rgba(23, 17, 67, .14);
+}
+
+.qr-panel { color: #171143; }
+.result-qr {
+  display: block;
+  width: min(100%, 320px);
+  aspect-ratio: 1;
+  margin: 0 auto 14px;
+  object-fit: contain;
+}
+.qr-panel strong { font-size: 14px; letter-spacing: .08em; }
+.result-shell > button { max-width: 320px; margin-top: 28px; }
+
+@media (max-width: 700px) {
+  .result-page { padding: 8px; }
+  .result-shell { padding: 16px 12px; }
+  .result-shell h1 { font-size: clamp(19px, 5.4vw, 26px); }
+  .result-shell > p { margin: 5px 0 14px; font-size: 12px; }
+  .result-content {
+    grid-template-columns: minmax(0, 1.15fr) minmax(0, .85fr);
+    gap: 12px;
+  }
+  .result-card { max-height: 59svh; }
+  .result-qr { width: min(36vw, 180px); margin-bottom: 8px; }
+  .qr-panel strong { font-size: 10px; }
+  .result-shell > button { min-height: 50px; margin-top: 14px; }
+}
+
+@media (max-height: 560px) {
+  .result-shell > p { display: none; }
+  .result-card { max-height: 52svh; }
+  .result-shell > button { min-height: 44px; margin-top: 8px; }
+}
 
 @media (max-height: 720px) {
   .brand-header img { max-height: 92px; object-fit: cover; }
