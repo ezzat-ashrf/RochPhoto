@@ -195,7 +195,7 @@ async function createPhotoCard(file, message) {
   const photoDataUrl = await readFileAsDataUrl(file);
   const [photo, cardTemplate] = await Promise.all([
     loadImage(photoDataUrl),
-    loadImage("card-template.png?v=20261020-4")
+    loadImage(CARD_TEMPLATE_DATA_URL)
   ]);
   const canvas = document.createElement("canvas");
   canvas.width = 1080;
