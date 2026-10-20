@@ -83,10 +83,10 @@ form.addEventListener("submit", async (event) => {
   submitButton.disabled = true;
   setStatus("Preparing your photo…");
   try {
-    const imageBase64 = await resizeImage(selectedFile, 900, 0.78);
     const cardBlob = await createPhotoCard(selectedFile, message);
+    const imageBase64 = await blobToDataUrl(cardBlob);
     const id = `${Date.now()}-${crypto.randomUUID()}`;
-    const submission = { id, imageBase64, message, createdAt: Date.now() };
+    const submission = { id, imageBase64, message, isCard: true, createdAt: Date.now() };
 
     setStatus("Sending to the big screen…");
     const historyResponse = await fetch(`${FIREBASE_ROOT}/submissions/${id}.json`, {
@@ -193,10 +193,12 @@ async function createPhotoCard(file, message) {
   const context = canvas.getContext("2d");
   if (!context) throw new Error("Your browser could not create the photo card.");
 
-  context.fillStyle = "#ffffff";
+  context.fillStyle = "#171143";
   context.fillRect(0, 0, canvas.width, canvas.height);
-  context.drawImage(header, 55, 18, 970, 228);
-  drawCover(context, photo, 80, 245, 920, 920);
+  context.fillStyle = "#ffffff";
+  context.fillRect(34, 34, canvas.width - 68, canvas.height - 68);
+  context.drawImage(header, 55, 36, 970, 228);
+  drawCover(context, photo, 90, 260, 900, 900);
 
   context.fillStyle = "#171143";
   context.textAlign = "center";
@@ -206,6 +208,15 @@ async function createPhotoCard(file, message) {
 
   return new Promise((resolve, reject) => {
     canvas.toBlob(blob => blob ? resolve(blob) : reject(new Error("PNG encoding failed.")), "image/png");
+  });
+}
+
+function blobToDataUrl(blob) {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = () => resolve(reader.result);
+    reader.onerror = () => reject(new Error("The completed card could not be prepared for the wall."));
+    reader.readAsDataURL(blob);
   });
 }
 
