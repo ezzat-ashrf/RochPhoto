@@ -86,7 +86,17 @@ form.addEventListener("submit", async (event) => {
     const cardBlob = await createPhotoCard(selectedFile, message);
     const imageBase64 = await blobToDataUrl(cardBlob);
     const id = `${Date.now()}-${crypto.randomUUID()}`;
-    const submission = { id, imageBase64, message, isCard: true, createdAt: Date.now() };
+    // Firebase receives the completed PNG card—not the original camera image.
+    const submission = {
+      id,
+      imageBase64,
+      message,
+      isCard: true,
+      cardWidth: 1080,
+      cardHeight: 1080,
+      cardAspectRatio: "1:1",
+      createdAt: Date.now()
+    };
 
     setStatus("Sending to the big screen…");
     const historyResponse = await fetch(`${FIREBASE_ROOT}/submissions/${id}.json`, {
@@ -183,28 +193,34 @@ function preloadImage(url) {
 
 async function createPhotoCard(file, message) {
   const photoDataUrl = await readFileAsDataUrl(file);
-  const [photo, header] = await Promise.all([
+  const [photo, cardTemplate] = await Promise.all([
     loadImage(photoDataUrl),
-    loadImage(BRAND_HEADER_DATA_URL)
+    loadImage("card-template.png?v=20261020-4")
   ]);
   const canvas = document.createElement("canvas");
   canvas.width = 1080;
-  canvas.height = 1450;
+  canvas.height = 1080;
   const context = canvas.getContext("2d");
   if (!context) throw new Error("Your browser could not create the photo card.");
 
-  context.fillStyle = "#171143";
-  context.fillRect(0, 0, canvas.width, canvas.height);
-  context.fillStyle = "#ffffff";
-  context.fillRect(34, 34, canvas.width - 68, canvas.height - 68);
-  context.drawImage(header, 55, 36, 970, 228);
-  drawCover(context, photo, 90, 260, 900, 900);
+  context.drawImage(cardTemplate, 0, 0, canvas.width, canvas.height);
 
-  context.fillStyle = "#171143";
+  // Exact photo opening from the supplied 600 x 600 Illustrator artwork.
+  drawCover(context, photo, 90, 209, 900, 665);
+
+  // Remove the sample name from the artwork while keeping its purple footer.
+  const footerGradient = context.createLinearGradient(0, 890, canvas.width, 1035);
+  footerGradient.addColorStop(0, "#2c225c");
+  footerGradient.addColorStop(0.5, "#5d4d98");
+  footerGradient.addColorStop(1, "#211946");
+  context.fillStyle = footerGradient;
+  context.fillRect(120, 900, 840, 125);
+
+  context.fillStyle = "#ffffff";
   context.textAlign = "center";
   context.textBaseline = "middle";
-  context.font = "700 48px Arial, sans-serif";
-  drawWrappedText(context, message, 540, 1240, 880, 60, 3);
+  context.font = "700 50px Arial, sans-serif";
+  drawWrappedText(context, message, 540, 962, 820, 56, 2);
 
   return new Promise((resolve, reject) => {
     canvas.toBlob(blob => blob ? resolve(blob) : reject(new Error("PNG encoding failed.")), "image/png");
